@@ -1,6 +1,6 @@
 package D_D.Units;
 
-public class Unit {
+public abstract class Unit {
 
     protected String name;
     protected int healthPool;
@@ -13,8 +13,8 @@ public class Unit {
         this.name = name;
         this.healthPool = healthPool;
         this.currentHealth = currentHealth;
-        attackPoints = attackPoints;
-        defensePoints = defensePoints;
+        this.attackPoints = attackPoints;
+        this.defensePoints = defensePoints;
         this.position = position;
     }
 
@@ -65,6 +65,15 @@ public class Unit {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public void takeTurn(){
+        takeAction();
+    }
+    /**
+     * The action the unit preforms on her turn in the game tick.
+     */
+    protected abstract void takeAction();
+
 
     @Override
     public String toString() {

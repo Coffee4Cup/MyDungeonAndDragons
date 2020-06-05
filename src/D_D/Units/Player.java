@@ -16,13 +16,13 @@ public class Player extends Unit {
     /**
      * preform levelup check and updates Player's level.
      */
-    private void LevelUp() {
+    public void LevelUp() {
         if (experience < MAX_EXP) {
             updatePlayerStats();
         }
     }
 
-    private void updatePlayerStats() {
+    protected void updatePlayerStats() {
         experience -= MAX_EXP;
         level++;
         healthPool += level * HEALTH_LEVEL_MULT;
