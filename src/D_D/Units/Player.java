@@ -1,6 +1,6 @@
 package D_D.Units;
 
-public class Player extends Unit {
+public abstract class Player extends Unit {
     private static final int MAX_EXP = 50;
     private static final int HEALTH_LEVEL_MULT = 10;
     private static final int ATTACK_LEVEL_MULT = 10;
@@ -12,6 +12,7 @@ public class Player extends Unit {
     public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
     }
+
 
     /**
      * preform levelup check and updates Player's level.

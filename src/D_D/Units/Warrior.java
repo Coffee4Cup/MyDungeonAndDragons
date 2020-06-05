@@ -1,7 +1,6 @@
 package D_D.Units;
 
 public class Warrior extends Player {
-    private static final int RESET_VALUE = 0;
     protected int coolDown;
     protected int remaining;
 
@@ -27,6 +26,14 @@ public class Warrior extends Player {
         this.remaining = remaining;
     }
 
+    /**
+     * The action the unit preforms on her turn in the game tick.
+     */
+    @Override
+    protected void takeAction() {
+
+    }
+
     @Override
     /**
      * updating the player's states upon leveling up
@@ -35,4 +42,6 @@ public class Warrior extends Player {
         super.updatePlayerStats();
         remaining = RESET_VALUE;
     }
+
+
 }

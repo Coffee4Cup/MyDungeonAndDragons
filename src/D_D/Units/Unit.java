@@ -2,6 +2,8 @@ package D_D.Units;
 
 public abstract class Unit {
 
+    protected static final int RESET_VALUE = 0;
+
     protected String name;
     protected int healthPool;
     protected int currentHealth;
@@ -77,13 +79,12 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        return "Unit{" +
+        return
                 "name='" + name + '\'' +
                 ", healthPool=" + healthPool +
                 ", currentHealth=" + currentHealth +
                 ", AttackPoints=" + attackPoints +
                 ", DefensePoints=" + defensePoints +
-                ", position=" + position +
-                '}';
+                ", position=" + position;
     }
 }
