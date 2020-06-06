@@ -7,6 +7,12 @@ package D_D.Units;
 public class Position {
     int y, x;
 
+    public Position(int y, int x) {
+        this.y = y;
+        this.x = x;
+    }
+
+
     public int getX() {
         return x;
     }
@@ -15,8 +21,5 @@ public class Position {
         this.x = x;
     }
 
-    public Position(int y, int x) {
-        this.y = y;
-        this.x = x;
-    }
+
 }

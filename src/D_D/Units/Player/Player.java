@@ -1,6 +1,7 @@
 package D_D.Units.Player;
 
 import D_D.Units.Position;
+import D_D.Units.SpecialAbility.SpecialAbility;
 import D_D.Units.Unit;
 
 public abstract class Player extends Unit {
@@ -9,13 +10,34 @@ public abstract class Player extends Unit {
     private static final int ATTACK_LEVEL_MULT = 10;
     private static final int DEFENSE_LEVEL_MULT = 2;
 
-    int experience;
-    int level;
+    private SpecialAbility specialAbility;
+    private int experience;
+    private int level;
 
     public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
     }
 
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public preformSpecialAbility()
+    {
+        specialAbility.cast();
+    }
 
     /**
      * preform levelup check and updates Player's level.
