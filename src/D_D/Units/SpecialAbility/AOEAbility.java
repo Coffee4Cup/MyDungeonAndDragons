@@ -41,7 +41,7 @@ public abstract class AOEAbility extends SpecialAbility {
     public ArrayList<Enemy> findEnemiesInRange() {
         ArrayList<Enemy> enemiesInRange = null;
         for (Enemy enemy : currentLevel.getEnemiesOnBoard()) {
-            if (enemy.getPosition().distance(unit.getPosition()) <= range) {
+            if (enemy.getPosition().distance(player.getPosition()) <= range) {
                 enemiesInRange.add(enemy);
             }
         }

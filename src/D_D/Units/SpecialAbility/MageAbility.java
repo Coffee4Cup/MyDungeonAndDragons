@@ -1,6 +1,8 @@
 package D_D.Units.SpecialAbility;
 
 import D_D.Level;
+import D_D.RandomGenerator.RandomGenerator;
+import D_D.RandomGenerator.TrueRandom;
 import D_D.Units.Enemy.Enemy;
 import D_D.Units.Unit;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 
 public class MageAbility extends AOEAbility {
 
+    RandomGenerator randomInt = new TrueRandom();
     int spellPower;
     int manaPool;
     int currentMana;
@@ -52,9 +55,14 @@ public class MageAbility extends AOEAbility {
     public void cast() {
         ArrayList<Enemy> enemiesInRange = findEnemiesInRange();
         int countHits = 0;
-        while ( !findEnemiesInRange().isEmpty() & countHits < hitTimes)
+        int targetIndex;
+        Enemy target;
+        while ( !enemiesInRange.isEmpty() & countHits < hitTimes)
         {//if there are enemies in range and the number of hits made is less the number of hits allowed for this mage per cast
-
+            targetIndex = randomInt.nextInt(enemiesInRange.size());
+             target = enemiesInRange.remove(targetIndex);
+             player.hit(target, spellPower);
+             countHits++;
         }
     }
 }

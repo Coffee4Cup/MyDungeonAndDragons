@@ -31,7 +31,7 @@ public class WarriorAbility extends SpecialAbility {
      */
     @Override
     void cast() {
-        int healingPoints = Math.min(unit.getHealthPool(), unit.getCurrentHealth() + healingValue);
-        unit.setCurrentHealth(healingPoints);
+        int healingPoints = Math.min(player.getHealthPool(), player.getCurrentHealth() + healingValue);
+        player.setCurrentHealth(healingPoints);
     }
 }

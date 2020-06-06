@@ -3,10 +3,10 @@ package D_D.Units.SpecialAbility;
 import D_D.Units.Unit;
 
 public abstract class SpecialAbility {
-    Unit unit;
+    Unit player;
 
-    public SpecialAbility(Unit unit) {
-        this.unit = unit;
+    public SpecialAbility(Unit player) {
+        this.player = player;
     }
 
     /**
