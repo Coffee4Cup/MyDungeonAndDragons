@@ -34,7 +34,7 @@ public abstract class Player extends Unit {
         this.level = level;
     }
 
-    public preformSpecialAbility()
+    public void preformSpecialAbility()
     {
         specialAbility.cast();
     }
