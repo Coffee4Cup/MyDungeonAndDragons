@@ -1,4 +1,6 @@
-package D_D.Units;
+package D_D.Units.Player;
+
+import D_D.Units.Position;
 
 public class Rouge extends Player {
 

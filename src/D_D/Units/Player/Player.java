@@ -1,4 +1,7 @@
-package D_D.Units;
+package D_D.Units.Player;
+
+import D_D.Units.Position;
+import D_D.Units.Unit;
 
 public abstract class Player extends Unit {
     private static final int MAX_EXP = 50;

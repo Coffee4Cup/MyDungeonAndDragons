@@ -1,4 +1,6 @@
-package D_D.Units;
+package D_D.Units.Enemy;
+
+import D_D.Units.Position;
 
 public class Monster extends Enemy {
     int visionRange;

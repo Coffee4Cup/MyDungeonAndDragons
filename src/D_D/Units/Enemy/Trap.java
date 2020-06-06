@@ -1,4 +1,6 @@
-package D_D.Units;
+package D_D.Units.Enemy;
+
+import D_D.Units.Position;
 
 public class Trap extends Enemy {
 
@@ -6,6 +8,10 @@ public class Trap extends Enemy {
     int relocationTime;
     int visibilityTime;
     int ticksCount;
+
+    public Trap(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile) {
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile);
+    }
 
     public int getRelocationRange() {
         return relocationRange;
