@@ -21,6 +21,8 @@ public class Mage extends Player {
         this.range = range;
     }
 
+
+
     /**
      * The action the unit preforms on her turn in the game tick.
      */
