@@ -6,13 +6,13 @@ import D_D.Units.Unit;
 
 public abstract class Player extends Unit {
     private static final int MAX_EXP = 50;
-    private static final int HEALTH_LEVEL_MULT = 10;
-    private static final int ATTACK_LEVEL_MULT = 10;
-    private static final int DEFENSE_LEVEL_MULT = 2;
+    private static final int HEALTH_LEVEL_MULTIPLAYER = 10;
+    private static final int ATTACK_LEVEL_MULTIPLAYER = 10;
+    private static final int DEFENSE_LEVEL_MULTIPLAYER = 2;
 
-    private SpecialAbility specialAbility;
-    private int experience;
-    private int level;
+    protected SpecialAbility specialAbility;
+    protected int experience;
+    protected int level;
 
     public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
@@ -34,9 +34,15 @@ public abstract class Player extends Unit {
         this.level = level;
     }
 
-    public void preformSpecialAbility()
+    /**
+     * attempts to cast the specailAbility this player was given.
+     * if the casting was successful, return true,
+     * else return false
+     * @return true is the casting was preformed successfully
+     */
+    public boolean preformSpecialAbility()
     {
-        specialAbility.cast();
+        return specialAbility.attemptToCast();
     }
 
     /**
@@ -51,10 +57,10 @@ public abstract class Player extends Unit {
     protected void updatePlayerStats() {
         experience -= MAX_EXP;
         level++;
-        healthPool += level * HEALTH_LEVEL_MULT;
+        healthPool += level * HEALTH_LEVEL_MULTIPLAYER;
         currentHealth = healthPool;
-        attackPoints += level * ATTACK_LEVEL_MULT;
-        defensePoints += level * DEFENSE_LEVEL_MULT;
+        attackPoints += level * ATTACK_LEVEL_MULTIPLAYER;
+        defensePoints += level * DEFENSE_LEVEL_MULTIPLAYER;
 
 
     }
