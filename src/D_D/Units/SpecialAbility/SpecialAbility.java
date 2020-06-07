@@ -2,7 +2,7 @@ package D_D.Units.SpecialAbility;
 
 import D_D.Units.Unit;
 
-public abstract class SpecialAbility {
+public abstract class SpecialAbility implements ScaleWithLevel {
     Unit player;
 
     public SpecialAbility(Unit player) {
@@ -10,19 +10,22 @@ public abstract class SpecialAbility {
     }
 
     /**
-     * if the unit has the recorces to cast the ability, the ability is casted
+     * if the unit has the resources to cast the ability, the ability is casted
      */
-    void callAbility() {
+    public boolean attemptToCast() {
+        boolean castedSuccessfully = false;
         if (!canCast()) {
             //@TODO add a way to generate an error message
         } else {
             cast();
             payResource();
+            castedSuccessfully = true;
         }
+        return castedSuccessfully;
     }
 
     /**
-     *
+     *the price for preforming the ability successfully
      */
     protected abstract void payResource();
 
@@ -37,4 +40,5 @@ public abstract class SpecialAbility {
      * preforms the casting of the ability
      */
     abstract void cast();
+
 }

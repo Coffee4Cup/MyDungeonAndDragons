@@ -1,27 +1,32 @@
 package D_D.Units.Player;
 
+import D_D.Level;
 import D_D.Units.Position;
+import D_D.Units.SpecialAbility.MageAbility;
 
 public class Mage extends Player {
 
-    int spellPower;
-    int manaPool;
-    int currentMana;
-    int cost;
-    int hitTimes;
-    int range;
+    protected int spellPower;
+    protected int manaPool;
+    protected int currentMana;
+    protected int cost;
+    protected int hitTimes;
+    protected int range;
 
-    public Mage(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int spellPower, int manaPool, int cost, int hitTimes, int range) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
-        this.spellPower = spellPower;
-        this.manaPool = manaPool;
-        this.currentMana = manaPool / 4;
-        this.cost = cost;
-        this.hitTimes = hitTimes;
-        this.range = range;
+    public Mage(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int spellPower, int manaPool, int cost, int hitTimes, int range, Level currentLevel) {
+         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
+        specialAbility = new MageAbility(this, range, currentLevel, spellPower, manaPool, cost, hitTimes);
+
     }
 
+    /**
+     * preform levelup check and updates Player's level.
+     */
+    @Override
+    public void LevelUp() {
+        super.LevelUp();
 
+    }
 
     /**
      * The action the unit preforms on her turn in the game tick.

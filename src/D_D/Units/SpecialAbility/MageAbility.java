@@ -6,11 +6,14 @@ import D_D.RandomGenerator.TrueRandom;
 import D_D.Units.Enemy.Enemy;
 import D_D.Units.Unit;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 public class MageAbility extends AOEAbility {
+
+    public static final int MANAPOOL_DENOMINATOR = 4;
+    private static final int SPELLPOWER_MULTIPLIER_FROM_LEVELUP = 10;
+    private static final int ADDED_MANAPOOL_FROM_LEVELUP = 25;
 
     RandomGenerator randomInt = new TrueRandom();
     int spellPower;
@@ -23,12 +26,59 @@ public class MageAbility extends AOEAbility {
         super(player, range, currentLevel);
         this.spellPower = spellPower;
         this.manaPool = manaPool;
-        this.currentMana = manaPool / 4;//@todo change this later to a constant
+        this.currentMana = manaPool / MANAPOOL_DENOMINATOR;
         this.cost = cost;
         this.hitTimes = hitTimes;
         this.range = range;
     }
 
+    public RandomGenerator getRandomInt() {
+        return randomInt;
+    }
+
+    public void setRandomInt(RandomGenerator randomInt) {
+        this.randomInt = randomInt;
+    }
+
+    public int getSpellPower() {
+        return spellPower;
+    }
+
+    public void setSpellPower(int spellPower) {
+        this.spellPower = spellPower;
+    }
+
+    public int getManaPool() {
+        return manaPool;
+    }
+
+    public void setManaPool(int manaPool) {
+        this.manaPool = manaPool;
+    }
+
+    public int getCurrentMana() {
+        return currentMana;
+    }
+
+    public void setCurrentMana(int currentMana) {
+        this.currentMana = currentMana;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getHitTimes() {
+        return hitTimes;
+    }
+
+    public void setHitTimes(int hitTimes) {
+        this.hitTimes = hitTimes;
+    }
 
     /**
      *
@@ -65,4 +115,16 @@ public class MageAbility extends AOEAbility {
              countHits++;
         }
     }
+
+
+    /**
+     * called whenever the Player that has this ability is leveled up.
+     * updates the ability's states according to the scaling constants
+     */
+    public void levelupUpdate(int newLevel) {
+        manaPool += ADDED_MANAPOOL_FROM_LEVELUP;
+        currentMana = Math.min(manaPool, currentMana + manaPool / MANAPOOL_DENOMINATOR);
+        spellPower += newLevel * SPELLPOWER_MULTIPLIER_FROM_LEVELUP;
+    }
+
 }

@@ -5,6 +5,7 @@ import D_D.Units.Unit;
 public class WarriorAbility extends SpecialAbility {
 
     private static final int COOLDOWN_COMPLETE = 0;
+
     private int healingValue;
     private int coolDown;
     private int remaining;
@@ -14,6 +15,15 @@ public class WarriorAbility extends SpecialAbility {
         this.coolDown = coolDown;
         this.remaining = 0;
         healingValue = unit.getDefensePoints();
+    }
+
+
+    /**
+     * the price for preforming the ability successfully
+     */
+    @Override
+    protected void payResource() {
+
     }
 
     /**
@@ -31,7 +41,12 @@ public class WarriorAbility extends SpecialAbility {
      */
     @Override
     void cast() {
-        int healingPoints = Math.min(player.getHealthPool(), player.getCurrentHealth() + healingValue);
-        player.setCurrentHealth(healingPoints);
+        int healthPoint = Math.min(player.getHealthPool(), player.getCurrentHealth() + healingValue);
+        player.setCurrentHealth(healthPoint);
+    }
+
+    @Override
+    public void updateAbility() {
+
     }
 }
