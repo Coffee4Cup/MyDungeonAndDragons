@@ -1,11 +1,12 @@
 package D_D.Units;
 
+import D_D.Level;
 import D_D.RandomGenerator.RandomGenerator;
 import D_D.RandomGenerator.TrueRandom;
 import D_D.Units.Enemy.Enemy;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class Unit {
+public abstract class Unit implements ChangeWithTick {
 
     protected static final int RESET_VALUE = 0;
 
@@ -16,6 +17,7 @@ public abstract class Unit {
     protected int attackPoints;
     protected int defensePoints;
     protected Position position;
+    protected Level currentLevel;
 
     public Unit(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
         this.name = name;
@@ -119,5 +121,16 @@ public abstract class Unit {
         int rolledAttack = this.rollAttack(maxHitDamage);
         int rolledDefence = defender.rollDefence();
         defender.healthPool -= rolledAttack - rolledDefence;
+    }
+
+    /**
+     * the hit a unit preforms when it attempts to walk on a tile a hostile unit is trying to walk on.
+     */
+    public void basicHit(Unit defender){
+        hit(defender, attackPoints);
+    }
+
+    public Level getCurrentLevel() {
+        return currentLevel;//@todo implement an observer Pattern for the player to get upddated whenever the game is moving level
     }
 }

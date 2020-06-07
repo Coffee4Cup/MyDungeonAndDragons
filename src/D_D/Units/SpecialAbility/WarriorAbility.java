@@ -4,7 +4,8 @@ import D_D.Units.Unit;
 
 public class WarriorAbility extends SpecialAbility {
 
-    private static final int COOLDOWN_COMPLETE = 0;
+    private static final int RESET_COOLDOWN = 0;
+    private static final int HEALING_MULTIPLAYER = 2;
 
     private int healingValue;
     private int coolDown;
@@ -13,8 +14,8 @@ public class WarriorAbility extends SpecialAbility {
     public WarriorAbility(Unit unit, int coolDown) {
         super(unit);
         this.coolDown = coolDown;
-        this.remaining = 0;
-        healingValue = unit.getDefensePoints();
+        this.remaining = RESET_COOLDOWN;
+        healingValue = unit.getDefensePoints() * HEALING_MULTIPLAYER;
     }
 
 
@@ -22,8 +23,8 @@ public class WarriorAbility extends SpecialAbility {
      * the price for preforming the ability successfully
      */
     @Override
-    protected void payResource() {
-
+    protected void payCost() {
+        remaining = coolDown;
     }
 
     /**
@@ -33,7 +34,7 @@ public class WarriorAbility extends SpecialAbility {
      */
     @Override
     boolean canCast() {
-        return coolDown == COOLDOWN_COMPLETE;
+        return coolDown == RESET_COOLDOWN;
     }
 
     /**
@@ -45,8 +46,21 @@ public class WarriorAbility extends SpecialAbility {
         player.setCurrentHealth(healthPoint);
     }
 
+    /**
+     * the update that happens whenever the player of the object levels up
+     *
+     * @param newLevel the new level of the player
+     */
     @Override
-    public void updateAbility() {
+    public void uponLevelingUp(int newLevel) {
+        remaining = RESET_COOLDOWN;
+    }
 
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+        remaining--;
     }
 }

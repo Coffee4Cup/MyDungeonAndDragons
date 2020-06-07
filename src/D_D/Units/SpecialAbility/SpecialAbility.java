@@ -1,8 +1,10 @@
 package D_D.Units.SpecialAbility;
 
+import D_D.Units.ChangeWithLevel;
+import D_D.Units.ChangeWithTick;
 import D_D.Units.Unit;
 
-public abstract class SpecialAbility implements ScaleWithLevel {
+public abstract class SpecialAbility implements ChangeWithLevel, ChangeWithTick {
     Unit player;
 
     public SpecialAbility(Unit player) {
@@ -18,7 +20,7 @@ public abstract class SpecialAbility implements ScaleWithLevel {
             //@TODO add a way to generate an error message
         } else {
             cast();
-            payResource();
+            payCost();
             castedSuccessfully = true;
         }
         return castedSuccessfully;
@@ -27,7 +29,7 @@ public abstract class SpecialAbility implements ScaleWithLevel {
     /**
      *the price for preforming the ability successfully
      */
-    protected abstract void payResource();
+    protected abstract void payCost();
 
     /**
      * checks if the unit can the cast the ability

@@ -23,7 +23,7 @@ public class MageAbility extends AOEAbility {
     int hitTimes;
 
     public MageAbility(Unit player, int range, Level currentLevel, int spellPower, int manaPool, int cost, int hitTimes) {
-        super(player, range, currentLevel);
+        super(player, range);
         this.spellPower = spellPower;
         this.manaPool = manaPool;
         this.currentMana = manaPool / MANAPOOL_DENOMINATOR;
@@ -84,7 +84,7 @@ public class MageAbility extends AOEAbility {
      *
      */
     @Override
-    protected void payResource() {
+    protected void payCost() {
 
     }
 
@@ -121,7 +121,7 @@ public class MageAbility extends AOEAbility {
      * called whenever the Player that has this ability is leveled up.
      * updates the ability's states according to the scaling constants
      */
-    public void levelupUpdate(int newLevel) {
+    public void uponLevelingUp(int newLevel) {
         manaPool += ADDED_MANAPOOL_FROM_LEVELUP;
         currentMana = Math.min(manaPool, currentMana + manaPool / MANAPOOL_DENOMINATOR);
         spellPower += newLevel * SPELLPOWER_MULTIPLIER_FROM_LEVELUP;

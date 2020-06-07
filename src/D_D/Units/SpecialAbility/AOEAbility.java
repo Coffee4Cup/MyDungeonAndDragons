@@ -8,12 +8,10 @@ import java.util.ArrayList;
 
 public abstract class AOEAbility extends SpecialAbility {
     int range; //the range of the attack
-    Level currentLevel; //the level the ability is preformed in
 
-    public AOEAbility(Unit player, int range, Level currentLevel) {
+    public AOEAbility(Unit player, int range) {
         super(player);
         this.range = range;
-        this.currentLevel = currentLevel;
     }
 
     public int getRange() {
@@ -24,28 +22,23 @@ public abstract class AOEAbility extends SpecialAbility {
         this.range = range;
     }
 
-    public Level getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public void setCurrentLevel(Level currentLevel) {
-        this.currentLevel = currentLevel;
-    }
-
-
     /**
-     * returns the hostile units (enemies that are in the range of the Player) in order the target them in the ability
+     * returns the hostile units (enemies that are in the range of the Player) in order to target them in the ability
      *
-     * @return
+     * @return a list of the enemys that are in range for the ability
      */
     public ArrayList<Enemy> findEnemiesInRange() {
         ArrayList<Enemy> enemiesInRange = null;
-        for (Enemy enemy : currentLevel.getEnemiesOnBoard()) {
+        for (Enemy enemy : getCurrentLevel().getEnemiesOnBoard()) {
             if (enemy.getPosition().distance(player.getPosition()) <= range) {
                 enemiesInRange.add(enemy);
             }
         }
         return enemiesInRange;
+    }
+
+    private Level getCurrentLevel(){
+        return player.getCurrentLevel();
     }
 
 
