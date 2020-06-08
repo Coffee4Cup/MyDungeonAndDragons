@@ -1,38 +1,16 @@
 package D_D.Units.Player;
 
 import D_D.Units.Position;
+import D_D.Units.SpecialAbility.RougeAbility;
 
 public class Rouge extends Player {
 
-    private static final int MAX_ENERGY = 100;
-    int currentEnergy;
-    int cost;
 
     public Rouge(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int cost) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
-        this.cost = cost;
-        currentEnergy = MAX_ENERGY;
+        specialAbility = new RougeAbility(cost);
     }
 
-    public static int getMaxEnergy() {
-        return MAX_ENERGY;
-    }
-
-    public int getCurrentEnergy() {
-        return currentEnergy;
-    }
-
-    public void setCurrentEnergy(int currentEnergy) {
-        this.currentEnergy = currentEnergy;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     /**
      * The action the unit preforms on her turn in the game tick.
@@ -47,6 +25,16 @@ public class Rouge extends Player {
      */
     @Override
     public void onGameTick() {
+        specialAbility.onGameTick();
+    }
 
+    /**
+     * the update that happens whenever the player of the object levels up
+     *
+     * @param newLevel the new level of the player
+     */
+    @Override
+    public void uponLevelingUp(int newLevel) {
+        super.uponLevelingUp(newLevel);
     }
 }

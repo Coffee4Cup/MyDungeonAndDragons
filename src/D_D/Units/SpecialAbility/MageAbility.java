@@ -1,10 +1,9 @@
 package D_D.Units.SpecialAbility;
 
-import D_D.Level;
 import D_D.RandomGenerator.RandomGenerator;
 import D_D.RandomGenerator.TrueRandom;
 import D_D.Units.Enemy.Enemy;
-import D_D.Units.Unit;
+import D_D.Units.Player.Player;
 
 import java.util.ArrayList;
 
@@ -22,8 +21,8 @@ public class MageAbility extends AOEAbility {
     int cost;
     int hitTimes;
 
-    public MageAbility(Unit player, int range, Level currentLevel, int spellPower, int manaPool, int cost, int hitTimes) {
-        super(player, range);
+    public MageAbility( int range, int spellPower, int manaPool, int cost, int hitTimes) {
+        super(range);
         this.spellPower = spellPower;
         this.manaPool = manaPool;
         this.currentMana = manaPool / MANAPOOL_DENOMINATOR;
@@ -100,18 +99,19 @@ public class MageAbility extends AOEAbility {
 
     /**
      * preforms the casting of the ability
+     * @param caster
      */
     @Override
-    public void cast() {
-        ArrayList<Enemy> enemiesInRange = findEnemiesInRange();
+    public void cast(Player caster) {
+        ArrayList<Enemy> enemiesInRange = findEnemiesInRange(caster);
         int countHits = 0;
         int targetIndex;
         Enemy target;
         while ( !enemiesInRange.isEmpty() & countHits < hitTimes)
-        {//if there are enemies in range and the number of hits made is less the number of hits allowed for this mage per cast
+        {//if there are enemies in range and the number of hits made is less the number of hits allowed for this mageAbility per cast
             targetIndex = randomInt.nextInt(enemiesInRange.size());
              target = enemiesInRange.remove(targetIndex);
-             player.hit(target, spellPower);
+             caster.hit(target, spellPower);
              countHits++;
         }
     }

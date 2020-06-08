@@ -1,6 +1,7 @@
 package D_D.Units.SpecialAbility;
 
-import D_D.Units.Unit;
+import D_D.Units.Player.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class WarriorAbility extends SpecialAbility {
 
@@ -11,11 +12,13 @@ public class WarriorAbility extends SpecialAbility {
     private int coolDown;
     private int remaining;
 
-    public WarriorAbility(Unit unit, int coolDown) {
-        super(unit);
+    private int getHealingValue(@NotNull Player caster) {
+        return caster.getLevel() * caster.getDefensePoints() * HEALING_MULTIPLAYER;
+    }
+
+    public WarriorAbility(int coolDown) {
         this.coolDown = coolDown;
         this.remaining = RESET_COOLDOWN;
-        healingValue = unit.getDefensePoints() * HEALING_MULTIPLAYER;
     }
 
 
@@ -41,9 +44,10 @@ public class WarriorAbility extends SpecialAbility {
      * preforms the casting of the ability
      */
     @Override
-    void cast() {
-        int healthPoint = Math.min(player.getHealthPool(), player.getCurrentHealth() + healingValue);
-        player.setCurrentHealth(healthPoint);
+    void cast(@NotNull Player caster) {
+        healingValue = getHealingValue(caster);
+        int newHealth = Math.min(caster.getHealthPool(), caster.getCurrentHealth() + healingValue);
+        caster.setCurrentHealth(newHealth);
     }
 
     /**

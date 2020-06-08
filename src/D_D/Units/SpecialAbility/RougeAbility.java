@@ -12,19 +12,16 @@ public class RougeAbility extends AOEAbility {
     private int energy;
 
     /**
-     *
-     * @param player the player that preforms has the ability
      * @param cost the cost of the ability in energy.
      */
-    public RougeAbility(Player player, int cost) {
-        super(player, ROUGE_ABILITY_RANGE);
+    public RougeAbility(int cost) {
+        super(ROUGE_ABILITY_RANGE);
         this.cost = cost;
         energy = 0;
     }
 
     /**
      * the price for preforming the ability successfully
-     *
      */
     protected void payCost() {
         energy -= cost;
@@ -42,17 +39,20 @@ public class RougeAbility extends AOEAbility {
 
     /**
      * preforms the casting of the ability
+     *
+     * @param caster
      */
     @Override
-    void cast() {
-         for (Enemy target: findEnemiesInRange()){
-             player.basicHit(target);
-         }
+    void cast(Player caster) {
+        for (Enemy target : findEnemiesInRange(caster)) {
+            caster.basicHit(target);
+        }
     }
+
 
     @Override
     public void uponLevelingUp(int newLevel) {
-
+        energy = MAX_ENERGY;
     }
 
     /**
@@ -60,6 +60,6 @@ public class RougeAbility extends AOEAbility {
      */
     @Override
     public void onGameTick() {
-
+        energy = Math.min(MAX_ENERGY, energy += 10);
     }
 }

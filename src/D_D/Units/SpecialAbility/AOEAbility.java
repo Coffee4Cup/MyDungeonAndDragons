@@ -2,15 +2,15 @@ package D_D.Units.SpecialAbility;
 
 import D_D.Level;
 import D_D.Units.Enemy.Enemy;
-import D_D.Units.Unit;
+import D_D.Units.Player.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public abstract class AOEAbility extends SpecialAbility {
     int range; //the range of the attack
 
-    public AOEAbility(Unit player, int range) {
-        super(player);
+    public AOEAbility(int range) {
         this.range = range;
     }
 
@@ -27,18 +27,18 @@ public abstract class AOEAbility extends SpecialAbility {
      *
      * @return a list of the enemys that are in range for the ability
      */
-    public ArrayList<Enemy> findEnemiesInRange() {
+    public ArrayList<Enemy> findEnemiesInRange(Player caster) {
         ArrayList<Enemy> enemiesInRange = null;
-        for (Enemy enemy : getCurrentLevel().getEnemiesOnBoard()) {
-            if (enemy.getPosition().distance(player.getPosition()) <= range) {
+        for (Enemy enemy : getCurrentLevel(caster).getEnemiesOnBoard()) {
+            if (enemy.getPosition().distance(caster.getPosition()) <= range) {
                 enemiesInRange.add(enemy);
             }
         }
         return enemiesInRange;
     }
 
-    private Level getCurrentLevel(){
-        return player.getCurrentGameLevel();
+    private Level getCurrentLevel(@NotNull Player caster){
+        return caster.getCurrentGameLevel();
     }
 
 

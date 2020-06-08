@@ -7,7 +7,7 @@ public class Warrior extends Player {
 
     public Warrior(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int coolDown) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
-        specialAbility = new WarriorAbility(this, coolDown);
+        specialAbility = new WarriorAbility(coolDown);
     }
 
     /**

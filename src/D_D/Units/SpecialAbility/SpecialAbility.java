@@ -2,24 +2,20 @@ package D_D.Units.SpecialAbility;
 
 import D_D.Units.ChangeWithLevel;
 import D_D.Units.ChangeWithTick;
-import D_D.Units.Unit;
+import D_D.Units.Player.Player;
 
 public abstract class SpecialAbility implements ChangeWithLevel, ChangeWithTick {
-    Unit player;
-
-    public SpecialAbility(Unit player) {
-        this.player = player;
-    }
 
     /**
      * if the unit has the resources to cast the ability, the ability is casted
+     * @param caster
      */
-    public boolean attemptToCast() {
+    public boolean attemptToCast(Player caster) {
         boolean castedSuccessfully = false;
         if (!canCast()) {
             //@TODO add a way to generate an error message
         } else {
-            cast();
+            cast(caster);
             payCost();
             castedSuccessfully = true;
         }
@@ -40,7 +36,8 @@ public abstract class SpecialAbility implements ChangeWithLevel, ChangeWithTick 
 
     /**
      * preforms the casting of the ability
+     * @param caster
      */
-    abstract void cast();
+    abstract void cast(Player caster);
 
 }

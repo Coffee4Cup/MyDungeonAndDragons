@@ -1,10 +1,11 @@
 package D_D.Units.Player;
 
+import D_D.Units.ChangeWithLevel;
 import D_D.Units.Position;
 import D_D.Units.SpecialAbility.SpecialAbility;
 import D_D.Units.Unit;
 
-public abstract class Player extends Unit {
+public abstract class Player extends Unit implements ChangeWithLevel{
     private static final int MAX_EXP = 50;
     private static final int HEALTH_LEVEL_MULTIPLAYER = 10;
     private static final int ATTACK_LEVEL_MULTIPLAYER = 10;
@@ -45,26 +46,27 @@ public abstract class Player extends Unit {
      * @return true is the casting was preformed successfully
      */
     public boolean preformSpecialAbility() {
-        return specialAbility.attemptToCast();
+        return specialAbility.attemptToCast(this);
     }
 
     /**
      * preform levelup check and updates Player's level.
      */
     public void LevelUp() {
-        if (experience < MAX_EXP) {
-            updatePlayerStats();
+        while (experience < MAX_EXP) {
+            uponLevelingUp(level + 1);
         }
     }
 
-    protected void updatePlayerStats() {
+
+    public void uponLevelingUp(int newLevel) {
         experience -= MAX_EXP;
         level++;
         healthPool += level * HEALTH_LEVEL_MULTIPLAYER;
         currentHealth = healthPool;
         attackPoints += level * ATTACK_LEVEL_MULTIPLAYER;
         defensePoints += level * DEFENSE_LEVEL_MULTIPLAYER;
-
+        specialAbility.uponLevelingUp(level);
 
     }
 }
