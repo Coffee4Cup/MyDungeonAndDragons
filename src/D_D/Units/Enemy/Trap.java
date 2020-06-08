@@ -52,4 +52,12 @@ public class Trap extends Enemy {
     protected void takeAction() {
 
     }
+
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+
+    }
 }

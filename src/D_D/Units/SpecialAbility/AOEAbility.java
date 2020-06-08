@@ -38,7 +38,7 @@ public abstract class AOEAbility extends SpecialAbility {
     }
 
     private Level getCurrentLevel(){
-        return player.getCurrentLevel();
+        return player.getCurrentGameLevel();
     }
 
 

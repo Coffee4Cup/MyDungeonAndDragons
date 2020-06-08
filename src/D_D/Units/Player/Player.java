@@ -16,6 +16,8 @@ public abstract class Player extends Unit {
 
     public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
+        level = 1;
+        experience = 0;
     }
 
     public int getExperience() {
@@ -34,14 +36,15 @@ public abstract class Player extends Unit {
         this.level = level;
     }
 
+
     /**
      * attempts to cast the specailAbility this player was given.
      * if the casting was successful, return true,
      * else return false
+     *
      * @return true is the casting was preformed successfully
      */
-    public boolean preformSpecialAbility()
-    {
+    public boolean preformSpecialAbility() {
         return specialAbility.attemptToCast();
     }
 

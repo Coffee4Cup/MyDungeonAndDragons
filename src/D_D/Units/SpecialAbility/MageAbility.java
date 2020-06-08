@@ -127,4 +127,11 @@ public class MageAbility extends AOEAbility {
         spellPower += newLevel * SPELLPOWER_MULTIPLIER_FROM_LEVELUP;
     }
 
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+
+    }
 }

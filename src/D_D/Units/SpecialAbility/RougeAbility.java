@@ -54,4 +54,12 @@ public class RougeAbility extends AOEAbility {
     public void uponLevelingUp(int newLevel) {
 
     }
+
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+
+    }
 }

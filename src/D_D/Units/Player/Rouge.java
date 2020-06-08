@@ -41,4 +41,12 @@ public class Rouge extends Player {
     protected void takeAction() {
 
     }
+
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+
+    }
 }

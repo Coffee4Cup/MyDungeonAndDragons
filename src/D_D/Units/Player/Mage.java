@@ -36,4 +36,11 @@ public class Mage extends Player {
 
     }
 
+    /**
+     * the changes the object preform after a game tick
+     */
+    @Override
+    public void onGameTick() {
+
+    }
 }
