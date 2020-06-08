@@ -17,13 +17,17 @@ public class WarriorAbilityTest {
             enemiesOnBoard1.add(new Monster("monster" + i, 100, 100, 0, 0, new Position(i, 1), 10, 'd', 0));
 
         }
-        Level lvl1 = new Level(null, null, new Position(1, 2),enemiesOnBoard1);
+        Warrior wr1 = new Warrior("wr1", 200, 100, 100, 10, null, 5);
+
+        wr1.uponLevelingUp(2);
+
+        wr1.preformSpecialAbility();
+
+        /*Level lvl1 = new Level(null, null, new Position(1, 2),enemiesOnBoard1);
         Mage mg1 = new Mage("mg1", 200, 100, 100, 10, null, 10, 100, 20, 4, 2, lvl1);
         mg1.setCurrentGameLevel(lvl1);
         mg1.preformSpecialAbility();
         Rouge rg1 = new Rouge("rg1", 200, 100, 100, 10, null, 20);
-        rg1.preformSpecialAbility();
-        Warrior wr1 = new Warrior("wr1", 200, 100, 100, 10, null, 0);
-        wr1.preformSpecialAbility();
+        rg1.preformSpecialAbility();*/
     }
 }

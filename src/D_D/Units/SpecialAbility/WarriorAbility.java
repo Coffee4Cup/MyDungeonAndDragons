@@ -13,7 +13,7 @@ public class WarriorAbility extends SpecialAbility {
     private int remaining;
 
     private int getHealingValue(@NotNull Player caster) {
-        return caster.getLevel() * caster.getDefensePoints() * HEALING_MULTIPLAYER;
+        return caster.getDefensePoints() * HEALING_MULTIPLAYER;
     }
 
     public WarriorAbility(int coolDown) {
@@ -37,7 +37,7 @@ public class WarriorAbility extends SpecialAbility {
      */
     @Override
     boolean canCast() {
-        return coolDown == RESET_COOLDOWN;
+        return remaining == RESET_COOLDOWN;
     }
 
     /**

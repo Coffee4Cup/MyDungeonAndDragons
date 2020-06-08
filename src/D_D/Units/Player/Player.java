@@ -1,11 +1,12 @@
 package D_D.Units.Player;
 
 import D_D.Units.ChangeWithLevel;
+import D_D.Units.ChangeWithTick;
 import D_D.Units.Position;
 import D_D.Units.SpecialAbility.SpecialAbility;
 import D_D.Units.Unit;
 
-public abstract class Player extends Unit implements ChangeWithLevel{
+public abstract class Player extends Unit implements ChangeWithLevel, ChangeWithTick {
     private static final int MAX_EXP = 50;
     private static final int HEALTH_LEVEL_MULTIPLAYER = 10;
     private static final int ATTACK_LEVEL_MULTIPLAYER = 10;
@@ -52,7 +53,7 @@ public abstract class Player extends Unit implements ChangeWithLevel{
     /**
      * preform levelup check and updates Player's level.
      */
-    public void LevelUp() {
+    public void LevelUpIfCan() {
         while (experience < MAX_EXP) {
             uponLevelingUp(level + 1);
         }
@@ -68,5 +69,10 @@ public abstract class Player extends Unit implements ChangeWithLevel{
         defensePoints += level * DEFENSE_LEVEL_MULTIPLAYER;
         specialAbility.uponLevelingUp(level);
 
+    }
+
+    @Override
+    public void onGameTick() {
+        specialAbility.onGameTick();
     }
 }
