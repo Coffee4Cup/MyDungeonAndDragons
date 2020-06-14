@@ -23,8 +23,8 @@ public class Mage extends Player {
      * preform levelup check and updates Player's level.
      */
     @Override
-    public void LevelUpIfCan() {
-        super.LevelUpIfCan();
+    public void levelUpIfCan() {
+        super.levelUpIfCan();
 
     }
 

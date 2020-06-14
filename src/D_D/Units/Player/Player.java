@@ -53,7 +53,7 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
     /**
      * preform levelup check and updates Player's level.
      */
-    public void LevelUpIfCan() {
+    public void levelUpIfCan() {
         while (experience < MAX_EXP) {
             uponLevelingUp(level + 1);
         }
