@@ -1,5 +1,6 @@
 package D_D.Units.Player;
 
+import D_D.RandomGenerator.RandomGenerator;
 import D_D.Units.ChangeWithLevel;
 import D_D.Units.ChangeWithTick;
 import D_D.Units.Position;
@@ -16,8 +17,8 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
     protected int experience;
     protected int level;
 
-    public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
+    public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator) {
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, randomGenerator);
         level = 1;
         experience = 0;
     }
@@ -68,7 +69,6 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
         attackPoints += level * ATTACK_LEVEL_MULTIPLAYER;
         defensePoints += level * DEFENSE_LEVEL_MULTIPLAYER;
         specialAbility.uponLevelingUp(level);
-
     }
 
     @Override

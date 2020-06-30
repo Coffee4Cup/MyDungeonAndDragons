@@ -28,7 +28,7 @@ public abstract class AOEAbility extends SpecialAbility {
      * @return a list of the enemys that are in range for the ability
      */
     public ArrayList<Enemy> findEnemiesInRange(Player caster) {
-        ArrayList<Enemy> enemiesInRange = null;
+        ArrayList<Enemy> enemiesInRange = new ArrayList<>();
         for (Enemy enemy : getCurrentLevel(caster).getEnemiesOnBoard()) {
             if (enemy.getPosition().distance(caster.getPosition()) <= range) {
                 enemiesInRange.add(enemy);

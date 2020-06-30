@@ -7,7 +7,7 @@ public class Rouge extends Player {
 
 
     public Rouge(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int cost) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, );
         specialAbility = new RougeAbility(cost);
     }
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Level {
 
-    Game game;
     char[][] board;
     Position playerSpawnPosition;
     ArrayList<Enemy> enemiesOnBoard;
@@ -22,13 +21,6 @@ public class Level {
         this.player = null;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     public char[][] getBoard() {
         return board;

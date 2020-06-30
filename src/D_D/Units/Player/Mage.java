@@ -1,6 +1,7 @@
 package D_D.Units.Player;
 
 import D_D.Level;
+import D_D.RandomGenerator.RandomGenerator;
 import D_D.Units.Position;
 import D_D.Units.SpecialAbility.MageAbility;
 
@@ -13,8 +14,8 @@ public class Mage extends Player {
     protected int hitTimes;
     protected int range;
 
-    public Mage(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int spellPower, int manaPool, int cost, int hitTimes, int range, Level currentLevel) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position);
+    public Mage(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int spellPower, int manaPool, int cost, int hitTimes, int range, Level currentLevel, RandomGenerator randomGenerator) {
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, randomGenerator );
         specialAbility = new MageAbility(range, spellPower, manaPool, cost, hitTimes);
 
     }

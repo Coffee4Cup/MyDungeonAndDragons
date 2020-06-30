@@ -2,14 +2,13 @@ package D_D.Units;
 
 import D_D.Level;
 import D_D.RandomGenerator.RandomGenerator;
-import D_D.RandomGenerator.TrueRandom;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Unit implements ChangeWithTick {
 
     protected static final int RESET_VALUE = 0;
 
-    protected RandomGenerator randomInt = new TrueRandom();
+    protected RandomGenerator randomGenerator;
     protected String name;
     protected int healthPool;
     protected int currentHealth;
@@ -18,7 +17,7 @@ public abstract class Unit implements ChangeWithTick {
     protected Position position;
     protected Level currentGameLevel;
 
-    public Unit(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position) {
+    public Unit(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator) {
         
         this.name = name;
         this.healthPool = healthPool;
@@ -26,6 +25,7 @@ public abstract class Unit implements ChangeWithTick {
         this.attackPoints = attackPoints;
         this.defensePoints = defensePoints;
         this.position = position;
+        this.randomGenerator = randomGenerator;
     }
 
     public void setCurrentGameLevel(Level currentGameLevel) {
@@ -109,7 +109,7 @@ public abstract class Unit implements ChangeWithTick {
      * @return the actual damage that the attack outputs
      */
     public int rollAttack(int maxHitDamage) {
-        return randomInt.nextInt(maxHitDamage);
+        return randomGenerator.nextInt(maxHitDamage);
     }
 
     /**
@@ -119,13 +119,13 @@ public abstract class Unit implements ChangeWithTick {
      * @return the actual defence that the defender outputs
      */
     public int rollDefence() {
-        return randomInt.nextInt(defensePoints);
+        return randomGenerator.nextInt(defensePoints);
     }
 
     /**
      * the general process a unit hits another unit
      *
-     * @param defender     the defending unit
+     * @param defender the defending unit
      * @param maxHitDamage the maximum damage the attacking unit can preform.
      */
     public void hit(@NotNull Unit defender, int maxHitDamage) {
