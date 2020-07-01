@@ -14,13 +14,11 @@ public class Level {
     Player player;
 
     public Level(Game game, char[][] board, Position playerSpawnPosition, ArrayList<Enemy> enemiesOnBoard) {
-        this.game = game;
         this.board = board;
         this.playerSpawnPosition = playerSpawnPosition;
         this.enemiesOnBoard = enemiesOnBoard;
         this.player = null;
     }
-
 
     public char[][] getBoard() {
         return board;

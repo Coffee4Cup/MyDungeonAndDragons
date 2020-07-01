@@ -1,5 +1,5 @@
 package D_D.MoveGenerator;
 
-public interface MoveGenerator {
+public interface ActionReader {
 String nextAction();
 }

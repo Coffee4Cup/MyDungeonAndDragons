@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class DeterministicMove implements MoveGenerator {
+public class DeterministicAction implements ActionReader {
 
     Scanner scan = null;
 
-    public DeterministicMove(String moveFilePath) {
+    public DeterministicAction(String moveFilePath) {
 
         try {
             this.scan = new Scanner(new BufferedReader(new FileReader(moveFilePath)));

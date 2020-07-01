@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * generates the input from the user for which way the player moves
  */
-public class TrueMove implements MoveGenerator {
+public class TrueAction implements ActionReader {
     Scanner scan = new Scanner(System.in);
 
     @Override

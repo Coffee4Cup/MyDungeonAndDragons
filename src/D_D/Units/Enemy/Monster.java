@@ -20,9 +20,10 @@ public class Monster extends Enemy {
 
     /**
      * The action the unit preforms on her turn in the game tick.
+     * @return
      */
     @Override
-    protected void takeAction() {
+    protected boolean takeAction() {
 
     }
 

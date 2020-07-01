@@ -80,14 +80,23 @@ public abstract class Unit implements ChangeWithTick {
         this.position = position;
     }
 
+    /**
+     * this is the method that is called whenever the unit gets a turn
+     * the method runs until the unit preform a valid action
+     */
     public void takeTurn() {
-        takeAction();
+        boolean validMove = false;
+        do{
+            validMove = attemptAction();
+        }while (!validMove);
     }
 
     /**
      * The action the unit preforms on her turn in the game tick.
+     * The methods that gets the action and the methods that try to preform the called action are implemented by the subclass.
+     * @return the action was carried successfully
      */
-    protected abstract void takeAction();
+    protected abstract boolean attemptAction();
 
 
     @Override
