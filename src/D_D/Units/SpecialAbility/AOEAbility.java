@@ -25,21 +25,16 @@ public abstract class AOEAbility extends SpecialAbility {
     /**
      * returns the hostile units (enemies that are in the range of the Player) in order to target them in the ability
      *
-     * @return a list of the enemys that are in range for the ability
+     * @return a list of the enemies that are in range for the ability
      */
-    public ArrayList<Enemy> findEnemiesInRange(Player caster) {
+    public ArrayList<Enemy> findEnemiesInRange(@NotNull Player caster) {
+        ArrayList<Enemy> enemiesOnCasterLevel = caster.getCurrentGameLevel().getEnemiesOnBoard();
         ArrayList<Enemy> enemiesInRange = new ArrayList<>();
-        for (Enemy enemy : getCurrentLevel(caster).getEnemiesOnBoard()) {
+        for (Enemy enemy : enemiesOnCasterLevel) {
             if (enemy.getPosition().distance(caster.getPosition()) <= range) {
                 enemiesInRange.add(enemy);
             }
         }
         return enemiesInRange;
     }
-
-    private Level getCurrentLevel(@NotNull Player caster){
-        return caster.getCurrentGameLevel();
-    }
-
-
 }

@@ -13,6 +13,12 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
     private static final int HEALTH_LEVEL_MULTIPLAYER = 10;
     private static final int ATTACK_LEVEL_MULTIPLAYER = 10;
     private static final int DEFENSE_LEVEL_MULTIPLAYER = 2;
+    private static final String MOVE_UP = "w";//this is the string the represent the player moves(might change this later)
+    private static final String MOVE_DOWN = "s";
+    private static final String MOVE_LEFT = "a";
+    private static final String MOVE_RIGHT = "d";
+    private static final String CAST_SPECIAL_ABILITY = "e";
+    private static final String DO_NOTHING = "q";
 
     protected SpecialAbility specialAbility;
     protected int experience;
@@ -42,9 +48,8 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
     }
 
 
-
     /**
-     * attempts to cast the specailAbility this player was given.
+     * attempts to cast the specialAbility this player was given.
      * if the casting was successful, return true,
      * else return false
      *
@@ -63,6 +68,34 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
         }
     }
 
+    /**
+     * The action the unit preforms on her turn in the game tick.
+     * the selection by the action reader and the attempt to preform the action is carried by this method
+     *
+     * @return the action was carried successfully
+     */
+    @Override
+    protected boolean attemptAction() {
+        boolean actionCarried = true;
+        String actionString = actionReader.nextAction();//gets the action String
+        if (actionString == MOVE_DOWN) {
+            //moveDown();
+        } else if (actionString == MOVE_UP) {
+            //moveUp
+        } else if (actionString == MOVE_LEFT) {
+            //moveLeft();
+        } else if (actionString == MOVE_RIGHT) {
+            //moveRight();
+        } else if (actionString == CAST_SPECIAL_ABILITY) {
+            preformSpecialAbility();
+        }else if(actionString == DO_NOTHING){
+            //does nothing...(this will be replaced by a call to UI observer)
+        }
+        else{
+            actionCarried = false;//the action the player choose is not found in the
+        }
+        return actionCarried;
+    }
 
     public void uponLevelingUp(int newLevel) {
         experience -= MAX_EXP;

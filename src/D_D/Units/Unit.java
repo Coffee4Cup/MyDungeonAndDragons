@@ -85,10 +85,10 @@ public abstract class Unit implements ChangeWithTick {
      * the method runs until the unit preform a valid action
      */
     public void takeTurn() {
-        boolean validMove = false;
-        do{
-            validMove = attemptAction();
-        }while (!validMove);
+        boolean validAction = false;
+        do{//try to make the action
+            validAction = attemptAction();
+        }while (!validAction);
     }
 
     /**
