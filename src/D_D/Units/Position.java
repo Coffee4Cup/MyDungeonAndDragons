@@ -2,8 +2,6 @@ package D_D.Units;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-
 /**
  * represents the Position of a Unit in on the Board via x and y coordinates.
  * The grid starts at the top left corner (0,0).
@@ -17,7 +15,6 @@ public class Position {
         this.x = x;
     }
 
-
     public int getX() {
         return x;
     }
@@ -26,11 +23,11 @@ public class Position {
         this.x = x;
     }
 
-
     public int distance(@NotNull Position other) {
         int xDistance = this.x - other.x;
         int yDistance = this.y - other.y;
 
-        return (int) Math.sqrt(Math.pow(yDistance, 2) + Math.pow(yDistance, 2));
+        return (int) Math.sqrt(Math.pow(yDistance, 2) + Math.pow(xDistance, 2));
     }
+
 }

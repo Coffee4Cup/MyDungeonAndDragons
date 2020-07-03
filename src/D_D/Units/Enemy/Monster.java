@@ -1,5 +1,6 @@
 package D_D.Units.Enemy;
 
+import D_D.MonsterType;
 import D_D.Units.Position;
 
 public class Monster extends Enemy {
@@ -8,6 +9,10 @@ public class Monster extends Enemy {
     public Monster(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, int visionRange) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile);
         this.visionRange = visionRange;
+    }
+
+    public Monster(MonsterType m) {
+        super(m);
     }
 
     public int getVisionRange() {

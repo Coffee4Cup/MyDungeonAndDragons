@@ -1,5 +1,6 @@
 package D_D.Units.Enemy;
 
+import D_D.TrapType;
 import D_D.Units.Position;
 
 public class Trap extends Enemy {
@@ -11,6 +12,10 @@ public class Trap extends Enemy {
 
     public Trap(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile) {
         super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile);
+    }
+
+    public Trap(TrapType t) {
+        super(t);
     }
 
     public int getRelocationRange() {
