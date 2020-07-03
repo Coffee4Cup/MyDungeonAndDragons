@@ -1,5 +1,6 @@
 package D_D.Units.Enemy;
 
+import D_D.RandomGenerator.RandomGenerator;
 import D_D.TrapType;
 import D_D.Units.Position;
 
@@ -10,12 +11,13 @@ public class Trap extends Enemy {
     int visibilityTime;
     int ticksCount;
 
-    public Trap(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile);
+    public Trap(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, RandomGenerator randomGenerator) {
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile, randomGenerator);
     }
 
-    public Trap(TrapType t) {
-        super(t);
+    public Trap(TrapType t, Position position) {
+        this();
+
     }
 
     public int getRelocationRange() {
@@ -54,10 +56,6 @@ public class Trap extends Enemy {
      * The action the unit preforms on her turn in the game tick.
      * @return
      */
-    @Override
-    protected boolean takeAction() {
-
-    }
 
     /**
      * the changes the object preform after a game tick

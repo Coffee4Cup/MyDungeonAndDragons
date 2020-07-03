@@ -69,44 +69,44 @@ public class Level {
 
             ArrayList<Enemy> enemiesOnBoard;
 
-            private int levelIndex;
+            private int lineIndex;//keeps track on the line in the level that the loaderoperates on
             private ArrayList<char[]> processedBoard;
 
             LevelLoader() {
-                levelIndex = 0;
+                lineIndex = 0;
                 processedBoard = new ArrayList<char[]>();
             }
 
             /**
              * iterates over the received line enter each tile to the processedBoard and creates unit and the player spawn point whe nit find them
-             * @param readLine
-             * @throws TooManySpawnPoints
-             * @throws TileCharNotFound
+             * @param boardStringLine
+             * @throws TooManySpawnPointsException
+             * @throws TileCharNotFoundException
              */
-            public void processLine(@NotNull String readLine) throws TooManySpawnPoints, TileCharNotFound {
+            public void processLine(@NotNull String boardStringLine) throws TooManySpawnPointsException, TileCharNotFoundException {
                 boolean foundCharMatch = false;
-                processedBoard.add(new char[readLine.length()]);
-                for (int i = 0; i < readLine.length(); i++) {
-                    char tileChar = readLine.charAt(i);
+                processedBoard.add(new char[boardStringLine.length()]);
+                for (int i = 0; i < boardStringLine.length(); i++) {// itertates over the index of every char in the text line
+                    char tileChar = boardStringLine.charAt(i);
                     if (tileChar == FLOOR_TILE || tileChar == WALL_TILE) {
                         foundCharMatch = true;
                     }else if(tileChar == SPAWN_POINT_TILE){
                         if(spawnFound()){
-                            throw new TooManySpawnPoints();//@todo implement this exception
+                            throw new TooManySpawnPointsException();//@todo implement this exception
                         }else {// sets the player position
-                            setPlayerSpawnPosition(new Position(levelIndex, i));
+                            setPlayerSpawnPosition(new Position(lineIndex, i));
                             foundCharMatch = true;
                         }
-                    }else if (loadsEnemiesByChar(tileChar)) {//seraches for enemies by their char <-throws the TooManySpawnPoints exception.
+                    }else if (loadsEnemiesByChar(tileChar)) {//seraches for enemies by their char <-throws the TooManySpawnPointsException exception.
                         foundCharMatch = true;
                     }
                     else{//thrown if the char of
-                        throw new TileCharNotFound();
+                        throw new TileCharNotFoundException();
                     }
                     if(foundCharMatch){
-                        processedBoard.get(levelIndex)[i] = tileChar;
+                        processedBoard.get(lineIndex)[i] = tileChar;
                     }
-
+                    lineIndex++;//increments the level index for the next line processing
                 }
             }
 
@@ -137,7 +137,7 @@ public class Level {
                     for (TrapType t : TrapType.values()) {
                         unitChar = t.getTrapChar();
                         if (unitChar == tileChar) {
-                            Trap onLevelMonster = new Trap(t);
+                            Trap onLevelMonster = new Trap(t,new Position(lineIndex, i ));
                             enemiesOnBoard.add(onLevelMonster);
                             foundUnit = true;
                             break;
@@ -145,34 +145,33 @@ public class Level {
                     }
                 }
                 if (foundUnit){
-
+                    processedBoard.get(lineIndex)[i]
                 }
                 return foundUnit;
             }
 
             public void transferBoard() {
-                board = new char[levelIndex][];
+                board = new char[lineIndex][];
                 processedBoard.toArray();
             }
         }
 
+
         LevelLoader levelLoader = new LevelLoader();
         try {
             levelTextStream = new BufferedReader(new FileReader("path"));
-            while (levelTextStream.ready()) {
+            while (levelTextStream.ready()) {//has a nextLine
                 try {
-                    levelLoader.processLine(levelTextStream.readLine());//the levelLoader process the line and for the level
-                } catch (TooManySpawnPoints tooManySpawnPoints) {
-                    tooManySpawnPoints.printStackTrace();
-                } catch (TileCharNotFound tileNotFound) {
+                    levelLoader.processLine(levelTextStream.readLine());//the levelLoader process the line and for the level,
+                } catch (TooManySpawnPointsException tooManySpawnPointsException) {
+                    tooManySpawnPointsException.printStackTrace();
+                } catch (TileCharNotFoundException tileNotFound) {
                     tileNotFound.printStackTrace();
                 }
             }
-        } catch (
-                FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         levelLoader.transferBoard();

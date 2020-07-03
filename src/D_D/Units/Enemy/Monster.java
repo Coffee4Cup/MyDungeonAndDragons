@@ -7,7 +7,7 @@ public class Monster extends Enemy {
     int visionRange;
 
     public Monster(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, int visionRange) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile);
+        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile, );
         this.visionRange = visionRange;
     }
 
