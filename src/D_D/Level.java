@@ -3,6 +3,7 @@ package D_D;
 import D_D.Units.Enemy.Enemy;
 import D_D.Units.Player.Player;
 import D_D.Units.Position;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -55,6 +56,17 @@ public class Level {
     }
 
     public void loadLevelFromText(String path) {
+        char[][] board = loadBoardFromText(path);
+        processesBoard();
+
+    }
+    //creates the array
+    private void processesBoard() {
+
+    }
+
+    //converts the lines from the text path stream to an arrayList of String g
+    private @NotNull ArrayList<String> ConvertTextToLines(String path) {
         ArrayList<String> levelLines = new ArrayList<>();
         BufferedReader levelLineBuffer;
         try {
@@ -65,9 +77,18 @@ public class Level {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        return levelLines;
     }
-}
+
+    //loads the board from the text file
+    private char[] @NotNull [] loadBoardFromText(String path) {
+        char[][] board;
+        ArrayList<String> levelLines = ConvertTextToLines(path);
+        board = new char [levelLines.size()][];
+        for (int i = 0; i < board.length; i++){//converts the line into char arrays in their appropriate row index.
+            board[i] = levelLines.get(0).toCharArray();
+        }
+        return board;
+    }
 
 }
