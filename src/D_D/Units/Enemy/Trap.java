@@ -14,8 +14,8 @@ public class Trap extends Enemy {
         super(name, healthPool, attackPoints, defensePoints, position, experienceValue, tile, randomGenerator);
     }
 
-    public Trap(TrapType t, Position position) {
-        this(t.getName(), t.getAttack(), t.getDefense(), position, t.getExperienceValue(), t.getExperienceValue(), t.getTile())
+    public Trap(TrapType t, Position position, RandomGenerator random) {
+        this(t.getName(),t.getHealth(), t.getAttack(), t.getDefense(), position, t.getExperienceValue(),t.getTile(), random);
     }
 
     public int getRelocationRange() {

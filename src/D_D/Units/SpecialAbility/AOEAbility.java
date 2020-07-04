@@ -1,6 +1,5 @@
 package D_D.Units.SpecialAbility;
 
-import D_D.Level;
 import D_D.Units.Enemy.Enemy;
 import D_D.Units.Player.Player;
 import org.jetbrains.annotations.NotNull;

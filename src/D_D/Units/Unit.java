@@ -1,6 +1,6 @@
 package D_D.Units;
 
-import D_D.Level;
+import D_D.Game;
 import D_D.RandomGenerator.RandomGenerator;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ public abstract class Unit implements ChangeWithTick {
     protected int attackPoints;
     protected int defensePoints;
     protected Position position;
-    protected Level currentGameLevel;
+    protected Game.Level currentGameLevel;
 
     public Unit(String name, int healthPool, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator) {
         
@@ -28,7 +28,7 @@ public abstract class Unit implements ChangeWithTick {
         this.randomGenerator = randomGenerator;
     }
 
-    public void setCurrentGameLevel(Level currentGameLevel) {
+    public void setCurrentGameLevel(Game.Level currentGameLevel) {
         this.currentGameLevel = currentGameLevel;
     }
 
@@ -150,7 +150,7 @@ public abstract class Unit implements ChangeWithTick {
         hit(defender, attackPoints);
     }
 
-    public Level getCurrentGameLevel() {
+    public Game.Level getCurrentGameLevel() {
         return currentGameLevel;//@todo implement an observer Pattern for the player to get upddated whenever the game is moving level
     }
 }
