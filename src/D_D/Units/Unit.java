@@ -17,11 +17,11 @@ public abstract class Unit implements ChangeWithTick {
     protected Position position;
     protected Level currentGameLevel;
 
-    public Unit(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator) {
+    public Unit(String name, int healthPool, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator) {
         
         this.name = name;
         this.healthPool = healthPool;
-        this.currentHealth = currentHealth;
+        this.currentHealth = healthPool;
         this.attackPoints = attackPoints;
         this.defensePoints = defensePoints;
         this.position = position;

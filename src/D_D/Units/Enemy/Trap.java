@@ -1,7 +1,6 @@
 package D_D.Units.Enemy;
 
 import D_D.RandomGenerator.RandomGenerator;
-import D_D.TrapType;
 import D_D.Units.Position;
 
 public class Trap extends Enemy {
@@ -11,13 +10,12 @@ public class Trap extends Enemy {
     int visibilityTime;
     int ticksCount;
 
-    public Trap(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, RandomGenerator randomGenerator) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, experienceValue, tile, randomGenerator);
+    public Trap(String name, int healthPool, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, RandomGenerator randomGenerator) {
+        super(name, healthPool, attackPoints, defensePoints, position, experienceValue, tile, randomGenerator);
     }
 
     public Trap(TrapType t, Position position) {
-        this();
-
+        this(t.getName(), t.getAttack(), t.getDefense(), position, t.getExperienceValue(), t.getExperienceValue(), t.getTile())
     }
 
     public int getRelocationRange() {

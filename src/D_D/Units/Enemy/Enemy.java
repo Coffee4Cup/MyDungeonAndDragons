@@ -28,8 +28,8 @@ public abstract class Enemy extends Unit {
     int ExperienceValue;
     char Tile;
 
-    public Enemy(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, RandomGenerator randomGenerator) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, randomGenerator);
+    public Enemy(String name, int healthPool, int attackPoints, int defensePoints, Position position, int experienceValue, char tile, RandomGenerator randomGenerator) {
+        super(name, healthPool, attackPoints, defensePoints, position, randomGenerator);
         ExperienceValue = experienceValue;
         Tile = tile;
     }
