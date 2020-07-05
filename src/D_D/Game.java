@@ -71,6 +71,7 @@ public class Game {
 
 
 
+
         //finds a char match between the set of valid char to the given tile from the board in constraction of the level
         private void findCharMatch(int i, int j, RandomGenerator randomGenerator) throws TooManySpawnPointsException, TileCharNotFoundException {
             char tile = board[i][j];
@@ -109,6 +110,9 @@ public class Game {
             if (foundMatch == false){
                 throw new TileCharNotFoundException();//if the given tile doesn't have recognisable char
             }
+        }
+        private void findCharMatch(int i, int j) throws TileCharNotFoundException, TooManySpawnPointsException {
+            findCharMatch(i, j, getRandom());
         }
 
         private @Nullable TrapType getTrapType(char tile) {
@@ -164,11 +168,13 @@ public class Game {
         /**
          * construct the level object from a path String of a text file
          * @param path the path of the level text file that represents the level
-         * @return the level
+         * @param randomGenerator the number generator the unit the the constractor spawn a instantiated with
+         * @return the level constructed.
+         *
          */
         public Level constructLevelFromText(String path, RandomGenerator randomGenerator) {
             char[][] board = loadBoardFromText(path);
-            return new Level(board, randomGenerator );
+            return new Level(board, randomGenerator);
         }
         /**
          * construct the level object from a path String of a text file
@@ -177,7 +183,7 @@ public class Game {
          */
         public Level constructLevelFromText(String path) {
             char[][] board = loadBoardFromText(path);
-            return new Level(board);
+            return new Level(board, getRandom());
         }
 
         //converts the lines from the text path stream to an arrayList of String g
