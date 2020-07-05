@@ -16,7 +16,7 @@ public class Mage extends Player {
     protected int range;
 
     public Mage(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int spellPower, int manaPool, int cost, int hitTimes, int range, Game.Level currentLevel, RandomGenerator randomGenerator, ActionReader actionReader) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, randomGenerator, actionReader );
+        super(name, healthPool, attackPoints, defensePoints, position, randomGenerator, actionReader);
         specialAbility = new MageAbility(range, spellPower, manaPool, cost, hitTimes);
 
     }

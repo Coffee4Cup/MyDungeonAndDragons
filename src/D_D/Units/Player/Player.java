@@ -25,7 +25,7 @@ public abstract class Player extends Unit implements ChangeWithLevel, ChangeWith
     protected int level;
     protected ActionReader actionReader;
 
-    public Player(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator, ActionReader actionReader) {
+    public Player(String name, int healthPool, int attackPoints, int defensePoints, Position position, RandomGenerator randomGenerator, ActionReader actionReader) {
         super(name, healthPool, attackPoints, defensePoints, position, randomGenerator);
         level = 1;
         experience = 0;

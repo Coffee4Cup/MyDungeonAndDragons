@@ -8,7 +8,7 @@ import D_D.Units.SpecialAbility.WarriorAbility;
 public class Warrior extends Player {
 
     public Warrior(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int coolDown, RandomGenerator randomGenerator, ActionReader actionReader) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position,randomGenerator, actionReader );
+        super(name, healthPool, attackPoints, defensePoints, position,randomGenerator, actionReader);
         specialAbility = new WarriorAbility(coolDown);
     }
 

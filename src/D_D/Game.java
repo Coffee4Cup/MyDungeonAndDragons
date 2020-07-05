@@ -50,15 +50,16 @@ public class Game {
         /**
          * implements the level from a the board paramater.
          * creates the spawnPoint and the Array of enemies while checking if the level constructed from the board is a valid level.
-         *
          * @param board the board temple the level is built upon.
+         * @param randomGenerator the randomGenerator the units that the level creates are instantiated with.
+         *
          */
-        private Level(@NotNull char[][] board) {
+        private Level(@NotNull char[][] board, RandomGenerator randomGenerator) {
             this.board = board;
             for (int i = 0; i < board[i].length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     try {
-                        findCharMatch(i, j);
+                        findCharMatch(i, j, randomGenerator);
                     } catch (TooManySpawnPointsException e) {
                         e.printStackTrace();
                     } catch (TileCharNotFoundException e) {
@@ -68,8 +69,10 @@ public class Game {
             }
         }
 
+
+
         //finds a char match between the set of valid char to the given tile from the board in constraction of the level
-        private void findCharMatch(int i, int j) throws TooManySpawnPointsException, TileCharNotFoundException {
+        private void findCharMatch(int i, int j, RandomGenerator randomGenerator) throws TooManySpawnPointsException, TileCharNotFoundException {
             char tile = board[i][j];
             boolean foundMatch = false;
             if (tile == WALL_TILE || tile == FLOOR_TILE) {
@@ -79,7 +82,7 @@ public class Game {
                 MonsterType m = getMonsterType(tile);
                 if (m != null) {//searches for a match with a Monster type
                     Position monsterPosition = new Position(i, j);
-                    Monster monsterOnLevel = new Monster(m, monsterPosition,  getRandom());
+                    Monster monsterOnLevel = new Monster(m, monsterPosition,  randomGenerator);
                     enemiesOnBoard.add(monsterOnLevel);
                     foundMatch = true;
                 }
@@ -88,7 +91,7 @@ public class Game {
                 TrapType t = getTrapType(tile);
                 if (t != null) {// if the getTrapType found a matching trapType
                     Position trapPosition = new Position(i, j);
-                    Trap monsterOnLevel = new Trap(t, trapPosition, getRandom());
+                    Trap monsterOnLevel = new Trap(t, trapPosition, randomGenerator);
                     enemiesOnBoard.add(monsterOnLevel);
                     foundMatch = true;
                 }
@@ -158,6 +161,20 @@ public class Game {
             this.player = player;
         }
 
+        /**
+         * construct the level object from a path String of a text file
+         * @param path the path of the level text file that represents the level
+         * @return the level
+         */
+        public Level constructLevelFromText(String path, RandomGenerator randomGenerator) {
+            char[][] board = loadBoardFromText(path);
+            return new Level(board, randomGenerator );
+        }
+        /**
+         * construct the level object from a path String of a text file
+         * @param path the path of the level text file that represents the level
+         * @return the level
+         */
         public Level constructLevelFromText(String path) {
             char[][] board = loadBoardFromText(path);
             return new Level(board);

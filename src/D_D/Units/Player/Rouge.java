@@ -1,25 +1,18 @@
 package D_D.Units.Player;
 
+import D_D.MoveGenerator.ActionReader;
+import D_D.RandomGenerator.RandomGenerator;
 import D_D.Units.Position;
 import D_D.Units.SpecialAbility.RougeAbility;
 
 public class Rouge extends Player {
 
 
-    public Rouge(String name, int healthPool, int currentHealth, int attackPoints, int defensePoints, Position position, int cost) {
-        super(name, healthPool, currentHealth, attackPoints, defensePoints, position, );
+    public Rouge(String name, int healthPool, int attackPoints, int defensePoints, Position position, int cost, RandomGenerator randomGenerator, ActionReader actionReader) {
+        super(name, healthPool, attackPoints, defensePoints, position, randomGenerator, actionReader);
         specialAbility = new RougeAbility(cost);
     }
 
-
-    /**
-     * The action the unit preforms on her turn in the game tick.
-     * @return
-     */
-    @Override
-    protected boolean takeAction() {
-
-    }
 
     /**
      * the changes the object preform after a game tick
