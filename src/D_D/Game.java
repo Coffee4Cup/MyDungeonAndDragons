@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
-    private RandomGenerator  random = new TrueRandom();//@TODO add the deterministic way
+    private RandomGenerator random = new TrueRandom();//@TODO add the deterministic way
     private ActionReader actionReader = new TrueAction();//@TODO add the deterministic way
 
     public RandomGenerator getRandom() {
@@ -37,15 +37,15 @@ public class Game {
         this.actionReader = actionReader;
     }
 
-    public class Level {
+    public static class Level {
 
         private static final char WALL_TILE = '#';
         private static final char FLOOR_TILE = '.';
         private static final char PLAYER_SPAWNPOINT = '@';
-        char[][] board;
-        Position playerSpawnPosition;
-        ArrayList<Enemy> enemiesOnBoard;
-        Player player;
+        protected char[][] board;
+        protected Position playerSpawnPosition;
+        protected ArrayList<Enemy> enemiesOnBoard;
+        protected Player player;
 
         /**
          * implements the level from a the board paramater.
@@ -56,7 +56,8 @@ public class Game {
          */
         private Level(@NotNull char[][] board, RandomGenerator randomGenerator) {
             this.board = board;
-            for (int i = 0; i < board[i].length; i++) {
+            enemiesOnBoard = new ArrayList<>();
+            for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     try {
                         findCharMatch(i, j, randomGenerator);
@@ -110,9 +111,6 @@ public class Game {
             if (foundMatch == false){
                 throw new TileCharNotFoundException();//if the given tile doesn't have recognisable char
             }
-        }
-        private void findCharMatch(int i, int j) throws TileCharNotFoundException, TooManySpawnPointsException {
-            findCharMatch(i, j, getRandom());
         }
 
         private @Nullable TrapType getTrapType(char tile) {
@@ -172,22 +170,14 @@ public class Game {
          * @return the level constructed.
          *
          */
-        public Level constructLevelFromText(String path, RandomGenerator randomGenerator) {
+        public static Level constructLevelFromText(String path, RandomGenerator randomGenerator) {
             char[][] board = loadBoardFromText(path);
             return new Level(board, randomGenerator);
         }
-        /**
-         * construct the level object from a path String of a text file
-         * @param path the path of the level text file that represents the level
-         * @return the level
-         */
-        public Level constructLevelFromText(String path) {
-            char[][] board = loadBoardFromText(path);
-            return new Level(board, getRandom());
-        }
 
         //converts the lines from the text path stream to an arrayList of String g
-        private @NotNull ArrayList<String> ConvertTextToLines(String path) {
+        private @NotNull
+        static ArrayList<String> ConvertTextToLines(String path) {
             ArrayList<String> levelLines = new ArrayList<>();
             BufferedReader levelLineBuffer;
             try {
@@ -202,15 +192,25 @@ public class Game {
         }
 
         //loads the board from the text file
-        private char[] @NotNull [] loadBoardFromText(String path) {
+        private static char[] @NotNull [] loadBoardFromText(String path) {
             char[][] board;
             ArrayList<String> levelLines = ConvertTextToLines(path);
             board = new char[levelLines.size()][];
             for (int i = 0; i < board.length; i++) {//converts the line into char arrays in their appropriate row index.
-                board[i] = levelLines.get(0).toCharArray();
+                board[i] = levelLines.get(i).toCharArray();
             }
             return board;
         }
 
+        public String toString(){
+            String boardString = "";
+            for (int i = 0; i < board.length; i++){
+                for (int j = 0;j < board[i].length; j++){
+                    boardString +=board[i][j];
+                }
+                boardString +="\n";
+            }
+            return boardString;
+        }
     }
 }

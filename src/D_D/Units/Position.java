@@ -15,6 +15,11 @@ public class Position {
         this.x = x;
     }
 
+    public Position(@NotNull Position other) {
+        other.x = x;
+        other.y = y;
+    }
+
     public int getX() {
         return x;
     }

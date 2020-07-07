@@ -8,7 +8,7 @@ public abstract class Unit implements ChangeWithTick {
 
     protected static final int RESET_VALUE = 0;
 
-    protected RandomGenerator randomGenerator;
+    protected final RandomGenerator randomGenerator;
     protected String name;
     protected int healthPool;
     protected int currentHealth;
@@ -73,7 +73,7 @@ public abstract class Unit implements ChangeWithTick {
     }
 
     public Position getPosition() {
-        return position;
+        return new Position(this.position);
     }
 
     public void setPosition(Position position) {
